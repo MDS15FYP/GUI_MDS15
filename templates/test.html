@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Drone Pictures</title>
+</head>
+<body>
+    <h1>Drone Pictures</h1>
+    <div id="image-container">
+        {% for image_name in image_names %}
+            <img src="{{ url_for('static', filename=image_name) }}" alt="{{ image_name }}">
+        {% endfor %}
+    </div>
+</body>
+</html>
+
+<div id="negativeEmotion" class="tm-tab-content">
+    <div class="tm-list">
+      {% for image_name in image_names %}
+        <div class="tm-list-item">          
+          <img src="{{ url_for('static', filename=image_name) }}" alt="Image" class="tm-list-item-img">
+          <div class="tm-black-bg tm-list-item-text">
+            <h3 class="tm-list-item-name">{{ image_name|split('.')[0] }}<span class="tm-list-item-price">$10.25</span></h3>
+            <p class="tm-list-item-description">Here is a short description for the first item. Wave Cafe Template is provided by Tooplate.</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  

@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone Based Emotion Recognition System for Real-Time Surveillance</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <link rel="stylesheet" href="fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" /> <!-- https://fonts.google.com/ -->
+    <link rel="stylesheet" href="css/tooplate-wave-cafe.css">
+    <link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous">
+<!--
+Tooplate 2121 Wave Cafe
+https://www.tooplate.com/view/2121-wave-cafe
+-->
+</head>
+<body>
+  <div class="tm-container">
+    <div class="tm-row">
+      <!-- Site Header -->
+      <div class="tm-left">
+        <div class="tm-left-inner">
+          <div class="tm-site-header">
+            <img src="img/monash_logo.jpg" alt="Image" class="tm-list-item-img">
+            <h1 class="tm-site-name">Drone Based Emotion 
+              <br>Recognition System 
+              <br>for Real-Time Surveillance</h1>
+          </div>
+          <nav class="tm-site-nav">
+            <ul class="tm-site-nav-ul">
+              <li class="tm-page-nav-item">
+                <a href="#detectedFace" class="tm-page-link active">
+                  <i class="fas fa-users tm-page-link-icon"></i>
+                  <span>Detected Faces</span>
+                </a>
+              </li>
+              <li class="tm-page-nav-item">
+                <a href="#EmoVisualisation" class="tm-page-link">
+                  <i class="fas fa-solid fa-chart-line tm-page-link-icon"></i>
+                  <span>Emotion Visualisation</span>
+                </a>
+              </li>
+              <li class="tm-page-nav-item">
+                <a href="#about" class="tm-page-link">
+                  <i class="fas fa-solid fa-address-card tm-page-link-icon"></i>
+                  <span>Project Details</span>
+                </a>
+              </li> 
+              <li class="tm-page-nav-item">
+                <a href="#contact" class="tm-page-link">
+                  <i class="fas fa-comments tm-page-link-icon"></i>
+                  <span>Group Contact</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>        
+      </div>
+      <div class="tm-right">
+        <main class="tm-main">
+          <div id="detectedFace" class="tm-page-content">
+            <!-- Drink Menu Page -->
+            <nav class="tm-black-bg tm-drinks-nav">
+              <ul>
+                <li>
+                  <a href="#" class="tm-tab-link active" data-id="negativeEmotion">Negative Emotion</a>
+                </li>
+                <li>
+                  <a href="#" class="tm-tab-link" data-id="positiveEmotion">Positive Emotion</a>
+                </li>
+                <li>
+                  <a href="#" class="tm-tab-link" data-id="otherEmotion">Others</a>
+                </li>
+              </ul>
+            </nav>
+
+            <div id="negativeEmotion" class="tm-tab-content">
+              <div class="tm-list">
+                <div class="tm-list-item">          
+                  <img src="Faces/face_Fearful_16.17.07.jpg" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Detected: Fearful<span class="tm-list-item-name">09/10/23</span></h3>
+                    <h4 class="tm-list-item-price">Time: 16:17:07</h4>
+                    <h4 class="tm-list-item-price">Location: Sunway Monash Residance</h4>
+                    <div class="float-right">
+                      <button type="button"
+                        class="btn"
+                        style="background-color: #099; color: #fff;"
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                        onclick="pauseTimer()">
+                        Show image
+                      </button>
+                      <div class="modal fade"
+                        id="exampleModal"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                    
+                            <div class="modal-body">
+                              <img id="image"
+                                src="Frames/frame_Fearful_16.17.07.jpg"
+                                alt="Click on button"
+                                style="width: 100%; height: auto;" />
+                            </div>
+                    
+                            <div class="modal-footer">
+                              <button type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                                onclick="resumeTimer()">
+                                Close
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Adding scripts to use bootstrap -->
+                      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                        crossorigin="anonymous">
+                      </script>
+                      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                        crossorigin="anonymous">
+                      </script>
+                      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                        crossorigin="anonymous">
+                      </script>
+                    </div>
+                    
+                    </div>                    
+                  </div>
+                <div class="tm-list-item">          
+                  <img src="Faces/face_Fearful_15.50.22.jpg" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Detected: Angry<span class="tm-list-item-name">09/10/23</span></h3>
+                    <h4 class="tm-list-item-price">Time: 15:50:22</h4>
+                    <h4 class="tm-list-item-price">Location: Monash Main Entrance</h4>
+                    <div class="float-right">
+                      <button type="button"
+                        class="btn"
+                        style="background-color: #099; color: #fff;"
+                        data-toggle="modal"
+                        data-target="#exampleModal2"
+                        onclick="pauseTimer()">
+                        Show image
+                      </button>
+
+                      <div class="modal fade"
+                        id="exampleModal2"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel2"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                    
+                            <div class="modal-body">
+                              <img id="image"
+                                src="Frames/frame_Fearful_15.50.22.jpg"
+                                alt="Click on button"
+                                style="width: 100%; height: auto;" />
+                            </div>
+                    
+                            <div class="modal-footer">
+                              <button type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                                onclick="resumeTimer()">
+                                Close
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="tm-list-item">          
+                  <img src="Faces/face_Fearful_15.48.43.jpg" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Detected: Sad<span class="tm-list-item-name">09/10/23</span></h3>
+                    <h4 class="tm-list-item-price">Time: 15:48:43</h4>
+                    <h4 class="tm-list-item-price">Location: Monash Main Entrance</h4>
+                    <div class="float-right">
+                      <button type="button"
+                        class="btn"
+                        style="background-color: #099; color: #fff;"
+                        data-toggle="modal"
+                        data-target="#exampleModal4"
+                        onclick="pauseTimer()">
+                        Show image
+                      </button>
+
+                      <div class="modal fade"
+                        id="exampleModal4"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel4"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                    
+                            <div class="modal-body">
+                              <img id="image"
+                                src="Frames/frame_Fearful_15.48.43.jpg"
+                                alt="Click on button"
+                                style="width: 100%; height: auto;" />
+                            </div>
+                    
+                            <div class="modal-footer">
+                              <button type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                                onclick="resumeTimer()">
+                                Close
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </div>
+                  </div>
+
+
+                </div> 
+                <div class="tm-list-item">          
+                  <img src="Faces/face_Fearful_12.25.49.jpg" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Detected: Fearful<span class="tm-list-item-name">09/10/23</span></h3>
+                    <h4 class="tm-list-item-price">Time: 12:25:49</h4>
+                    <h4 class="tm-list-item-price">Location: Monash Main Entrance</h4>
+                      <div class="float-right">
+                        <button type="button"
+                          class="btn"
+                          style="background-color: #099; color: #fff;"
+                          data-toggle="modal"
+                          data-target="#exampleModal3"
+                          onclick="pauseTimer()">
+                          Show image
+                        </button>
+    
+                        <div class="modal fade"
+                          id="exampleModal3"
+                          tabindex="-1"
+                          role="dialog"
+                          aria-labelledby="exampleModalLabel3"
+                          aria-hidden="true"
+                          onhide="resumeTimer()">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+    
+                              <div class="modal-body">
+                                <img id="image"
+                                  src="Frames/frame_Fearful_12.25.49.jpg"
+                                  alt="Click on button"
+                                  style="width: 100%; height: auto;" />
+                              </div>
+    
+                              <div class="modal-footer">
+                                <button type="button"
+                                  class="btn btn-secondary"
+                                  data-dismiss="modal"
+                                  onclick="resumeTimer()">
+                                  Close
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>                      
+              </div>
+            </div>
+            
+              </div>
+            </div>
+            <div id="positiveEmotion" class="tm-tab-content">
+              <div class="tm-list">
+              
+                <div class="tm-list-item">          
+                  <img src="faces/face_Happy_11.06.46.jpg" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Detected: Happy<span class="tm-list-item-name">12/10/23</span></h3>
+                    <h4 class="tm-list-item-price">Time: 11:06:46</h4>
+                    <h4 class="tm-list-item-price">Location: Unknown</h4>
+                    <div class="float-right">
+                      <button type="button"
+                        class="btn"
+                        style="background-color: #099; color: #fff;"
+                        data-toggle="modal"
+                        data-target="#exampleModal8"
+                        onclick="pauseTimer()">
+                        Show image
+                      </button>
+
+                      <div class="modal fade"
+                        id="exampleModal8"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel8"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                    
+                            <div class="modal-body">
+                              <img id="image"
+                                src="frames/frame_Happy_11.06.46.jpg"
+                                alt="Click on button"
+                                style="width: 100%; height: auto;" />
+                            </div>
+                    
+                            <div class="modal-footer">
+                              <button type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                                onclick="resumeTimer()">
+                                Close
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </div>             
+                  </div>
+                </div>
+                <div class="tm-list-item">          
+                  <img src="Faces/face_Suprised_12.08.52.jpg" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Detected: Happy<span class="tm-list-item-name">10/10/23</span></h3>
+                    <h4 class="tm-list-item-price">Time: 12:08:52</h4>
+                    <h4 class="tm-list-item-price">Location: Monash Main Entrance</h4>
+                    <div class="float-right">
+                      <button type="button"
+                        class="btn"
+                        style="background-color: #099; color: #fff;"
+                        data-toggle="modal"
+                        data-target="#exampleModal9"
+                        onclick="pauseTimer()">
+                        Show image
+                      </button>
+
+                      <div class="modal fade"
+                        id="exampleModal9"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel9"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                    
+                            <div class="modal-body">
+                              <img id="image"
+                                src="Frames/frame_Suprised_12.08.52.jpg"
+                                alt="Click on button"
+                                style="width: 100%; height: auto;" />
+                            </div>
+                    
+                            <div class="modal-footer">
+                              <button type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                                onclick="resumeTimer()">
+                                Close
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </div>           
+                  </div>
+                </div>
+                <div class="tm-list-item">          
+                  <img src="Faces/face_Suprised_15.50.22.jpg" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Detected: Suprised<span class="tm-list-item-name">09/10/23</span></h3>
+                    <h4 class="tm-list-item-price">Time: 15:50:22</h4>
+                    <h4 class="tm-list-item-price">Location: Monash Main Entrance</h4>
+                    <div class="float-right">
+                      <button type="button"
+                        class="btn"
+                        style="background-color: #099; color: #fff;"
+                        data-toggle="modal"
+                        data-target="#exampleModal10"
+                        onclick="pauseTimer()">
+                        Show image
+                      </button>
+
+                      <div class="modal fade"
+                        id="exampleModal10"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel10"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                    
+                            <div class="modal-body">
+                              <img id="image"
+                                src="Frames/frame_Suprised_15.50.22.jpg"
+                                alt="Click on button"
+                                style="width: 100%; height: auto;" />
+                            </div>
+                    
+                            <div class="modal-footer">
+                              <button type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                                onclick="resumeTimer()">
+                                Close
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </div>             
+                  </div>
+                </div>
+                <div class="tm-list-item">          
+                  <img src="Faces/face_Happy_12.33.56.jpg" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Detected: Happy<span class="tm-list-item-name">09/10/23</span></h3>
+                    <h4 class="tm-list-item-price">Time: 12:33:56</h4>
+                    <h4 class="tm-list-item-price">Location: Sunway Monash Residance</h4>
+                    <div class="float-right">
+                      <button type="button"
+                        class="btn"
+                        style="background-color: #099; color: #fff;"
+                        data-toggle="modal"
+                        data-target="#exampleModal11"
+                        onclick="pauseTimer()">
+                        Show image
+                      </button>
+
+                      <div class="modal fade"
+                        id="exampleModal11"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel11"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                    
+                            <div class="modal-body">
+                              <img id="image"
+                                src="Frames/frame_Happy_12.33.56.jpg"
+                                alt="Click on button"
+                                style="width: 100%; height: auto;" />
+                            </div>
+                    
+                            <div class="modal-footer">
+                              <button type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                                onclick="resumeTimer()">
+                                Close
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </div>      
+                  </div>
+                </div>
+                         
+              </div>
+            </div>
+
+            <div id="otherEmotion" class="tm-tab-content">
+              <div class="tm-list">
+                <div class="tm-list-item">          
+                  <img src="Faces/face_masked_16.21.28.jpg" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Detected: Mask<span class="tm-list-item-name">10/10/23</span></h3>
+                    <h4 class="tm-list-item-price">Time: 16:21:28</h4>
+                    <h4 class="tm-list-item-price">Location: Monash Main Entrance</h4>
+                    <div class="float-right">
+                      <button type="button"
+                        class="btn"
+                        style="background-color: #099; color: #fff;"
+                        data-toggle="modal"
+                        data-target="#exampleModal12"
+                        onclick="pauseTimer()">
+                        Show image
+                      </button>
+
+                      <div class="modal fade"
+                        id="exampleModal12"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel12"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                    
+                            <div class="modal-body">
+                              <img id="image"
+                                src="Frames/frame_masked_16.21.28.jpg"
+                                alt="Click on button"
+                                style="width: 100%; height: auto;" />
+                            </div>
+                    
+                            <div class="modal-footer">
+                              <button type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                                onclick="resumeTimer()">
+                                Close
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </div>              
+                  </div>
+                </div>
+                <div class="tm-list-item">          
+                  <img src="Faces/face_Neutral_16.22.31.jpg" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Detected: Neutral<span class="tm-list-item-name">09/10/23</span></h3>
+                    <h4 class="tm-list-item-price">Time: 16:22:31</h4>
+                    <h4 class="tm-list-item-price">Location: Monash Main Entrance</h4>
+                    <div class="float-right">
+                      <button type="button"
+                        class="btn"
+                        style="background-color: #099; color: #fff;"
+                        data-toggle="modal"
+                        data-target="#exampleModal13"
+                        onclick="pauseTimer()">
+                        Show image
+                      </button>
+
+                      <div class="modal fade"
+                        id="exampleModal13"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel13"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                    
+                            <div class="modal-body">
+                              <img id="image"
+                                src="Frames/frame_Neutral_16.22.31.jpg"
+                                alt="Click on button"
+                                style="width: 100%; height: auto;" />
+                            </div>
+                    
+                            <div class="modal-footer">
+                              <button type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                                onclick="resumeTimer()">
+                                Close
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </div>                 
+                  </div>
+                </div>
+                <div class="tm-list-item">          
+                  <img src="Faces/face_masked_14.57.19.jpg" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Detected: Masked<span class="tm-list-item-name">09/10/23</span></h3>
+                    <h4 class="tm-list-item-price">Time: 14:57:19</h4>
+                    <h4 class="tm-list-item-price">Location: Sunway Monash Residance</h4>
+                    <div class="float-right">
+                      <button type="button"
+                        class="btn"
+                        style="background-color: #099; color: #fff;"
+                        data-toggle="modal"
+                        data-target="#exampleModal14"
+                        onclick="pauseTimer()">
+                        Show image
+                      </button>
+
+                      <div class="modal fade"
+                        id="exampleModal14"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel14"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                    
+                            <div class="modal-body">
+                              <img id="image"
+                                src="Frames/frame_masked_14.57.19.jpg"
+                                alt="Click on button"
+                                style="width: 100%; height: auto;" />
+                            </div>
+                    
+                            <div class="modal-footer">
+                              <button type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                                onclick="resumeTimer()">
+                                Close
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </div>    
+                  </div>
+                </div>
+                <div class="tm-list-item">          
+                  <img src="Faces/face_Neutral_12.14.05.jpg" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Detected: Neutral<span class="tm-list-item-name">09/10/23</span></h3>
+                    <h4 class="tm-list-item-price">Time: 12:14:05</h4>
+                    <h4 class="tm-list-item-price">Location: Sunway Monash Residance</h4>
+                    <div class="float-right">
+                      <button type="button"
+                        class="btn"
+                        style="background-color: #099; color: #fff;"
+                        data-toggle="modal"
+                        data-target="#exampleModal15"
+                        onclick="pauseTimer()">
+                        Show image
+                      </button>
+
+                      <div class="modal fade"
+                        id="exampleModal15"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel15"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                    
+                            <div class="modal-body">
+                              <img id="image"
+                                src="Frames/frame_Neutral_12.14.05.jpg"
+                                alt="Click on button"
+                                style="width: 100%; height: auto;" />
+                            </div>
+                    
+                            <div class="modal-footer">
+                              <button type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                                onclick="resumeTimer()">
+                                Close
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </div>              
+                  </div>
+                </div>              
+              </div> 
+            </div> 
+            <!-- end Drink Menu Page -->
+          </div>
+          
+
+          <!-- About Us Page -->
+          <div id="about" class="tm-page-content">
+            <div class="tm-black-bg tm-mb-20 tm-about-box-1">              
+              <h2 class="tm-text-primary tm-about-header">About Our Project</h2>
+              <br><br>
+              <div class="tm-list-item tm-list-item-2">                
+                <div class="tm-list-item-text-2">
+                  <p>Our project is "Drone-based Emotion Recognition System for Real-time Surveillance" which tackles crucial research problems in modern surveillance. </p>
+                  <p>The project aims to create a real-time face recognition model utilising drones, to enhance security with its tracking capabilities, while also 
+                    incorporating emotional analysis to identify suspicious activities.</p>
+                    <br><br>
+                </div>                
+              </div>
+            </div>
+            <!-- 
+            <div class="tm-black-bg tm-mb-20 tm-about-box-2">              
+              <div class="tm-list-item tm-list-item-2">                
+                <div class="tm-list-item-text-2">
+                  <h2 class="tm-text-primary">About Our Team</h2>
+                  <p>
+                    <b style="font-size:25px">Dr. Adamu Muhammed Buhari</b>
+                    <br>Project Supervisor
+                    <br><b>Email:</b> AdamuMuhammad.Buhari@monash.edu
+                    <br>
+                    <br>
+                    <b style="font-size:25px">Ethan Lee</b>
+                    <br>Product Manager
+                    <br><b>Email:</b> elee0068@student.monash.edu 
+                    <br>
+                    <br><b style="font-size:25px">En Ming Soh</b>
+                    <br>Quality Assurance
+                    <br><b>Email:</b> esoh0005@student.monash.edu 
+                    <br>
+                    <br><b style="font-size:25px">Wang Qian</b>
+                    <br>Technical Lead
+                    <br><b>Email:</b> qwan0066@student.monash.edu</p>                   
+                </div>   
+                         
+                <img src="Adamu.png" alt="Image" class="tm-list-item-img tm-list-item-img-big tm-img-right">             
+              </div>
+            </div>
+          --> 
+          </div>
+          <!-- end About Us Page -->
+
+          <!-- Special Items Page -->
+          <div id="EmoVisualisation" class="tm-page-content">
+            <div class="tm-special-items">
+              <div class="tm-emo-vis-black-bg tm-special-item">
+                  <div class="tm-special-vis" id = "visualization"></div>
+                  <div class="tm-special-item-description">
+                    <h2 class="tm-text-primary tm-special-item-title">Emotional Data Collected</h2>
+                    <p class="tm-special-item-text">Here's the emotional data visualization based on the collected data.</p>  
+                  </div>
+                </div>
+            </div>            
+          </div>
+          <!-- end Special Items Page -->
+
+          <!-- Contact Page -->
+          <div id="contact" class="tm-page-content">
+            <div class="tm-black-bg tm-contact-text-container">
+              <h2 class="tm-text-primary">Group Contact for MDS15</h2>
+              <br><br>
+              <p>
+                <b style="font-size:25px">Dr. Adamu Muhammed Buhari</b>
+                    <br>Project Supervisor
+                    <br><b>Email:</b> AdamuMuhammad.Buhari@monash.edu
+                    <br>
+                    <br>
+                    <b style="font-size:25px">Ethan Lee</b>
+                    <br>Product Manager
+                    <br><b>Email:</b> elee0068@student.monash.edu 
+                    <br>
+                    <br><b style="font-size:25px">En Ming Soh</b>
+                    <br>Quality Assurance
+                    <br><b>Email:</b> esoh0005@student.monash.edu 
+                    <br>
+                    <br><b style="font-size:25px">Wang Qian</b>
+                    <br>Technical Lead
+                    <br><b>Email:</b> qwan0066@student.monash.edu</p>  
+            </div>
+            <div class="tm-black-bg tm-contact-text-container">
+              <form action="" method="POST" id="contact-form">
+                <div class="tm-form-group">
+                  <input type="text" name="name" class="tm-form-control" placeholder="Name" required="" />
+                </div>
+                <div class="tm-form-group">
+                  <input type="email" name="email" class="tm-form-control" placeholder="Email" required="" />
+                </div>        
+                <div class="tm-form-group tm-mb-30">
+                  <textarea rows="6" name="message" class="tm-form-control" placeholder="Message" required=""></textarea>
+                </div>        
+                <div>
+                  <button type="submit" class="tm-btn-primary">
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- end Contact Page -->
+        </main>
+      </div>    
+    </div>
+    <footer class="tm-site-footer">
+      <p class="tm-black-bg tm-footer-text">Copyright 2023 MDS15
+      
+      | Contact: mds15fyp@gmail.com</p>
+    </footer>
+  </div>
+    
+  <!-- Background video -->
+  <div class="tm-video-wrapper">
+      <i id="tm-video-control-button" class="fas fa-pause"></i>
+      <video autoplay muted loop id="tm-video">
+          <source src="video/Perfect_Loop.mp4" type="video/mp4">
+      </video>
+  </div>
+
+  <script src="js/jquery-3.4.1.min.js"></script>    
+  <script type="text/javascript">
+
+    var vis1 = "js/visualization.vg.json";
+    vegaEmbed('#visualization', vis1,{"actions":false}).then(function(result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+      vis1_view= result.view;
+    }).catch(console.error);
+  </script> 
+  <script>
+
+    function setVideoSize() {
+      const vidWidth = 1920;
+      const vidHeight = 1080;
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+      const tempVidWidth = windowHeight * vidWidth / vidHeight;
+      const tempVidHeight = windowWidth * vidHeight / vidWidth;
+      const newVidWidth = tempVidWidth > windowWidth ? tempVidWidth : windowWidth;
+      const newVidHeight = tempVidHeight > windowHeight ? tempVidHeight : windowHeight;
+      const tmVideo = $('#tm-video');
+
+      tmVideo.css('width', newVidWidth);
+      tmVideo.css('height', newVidHeight);
+    }
+
+    function openTab(evt, id) {
+      $('.tm-tab-content').hide();
+      $('#' + id).show();
+      $('.tm-tab-link').removeClass('active');
+      $(evt.currentTarget).addClass('active');
+    }    
+
+    function initPage() {
+      let pageId = location.hash;
+
+      if(pageId) {
+        highlightMenu($(`.tm-page-link[href^="${pageId}"]`)); 
+        showPage($(pageId));
+      }
+      else {
+        pageId = $('.tm-page-link.active').attr('href');
+        showPage($(pageId));
+      }
+    }
+
+    function highlightMenu(menuItem) {
+      $('.tm-page-link').removeClass('active');
+      menuItem.addClass('active');
+    }
+
+    function showPage(page) {
+      $('.tm-page-content').hide();
+      page.show();
+    }
+
+    $(document).ready(function(){
+
+      /***************** Pages *****************/
+
+      initPage();
+
+      $('.tm-page-link').click(function(event) {
+        
+        if(window.innerWidth > 991) {
+          event.preventDefault();
+        }
+
+        highlightMenu($(event.currentTarget));
+        showPage($(event.currentTarget.hash));
+      });
+
+      
+      /***************** Tabs *******************/
+
+      $('.tm-tab-link').on('click', e => {
+        e.preventDefault(); 
+        openTab(e, $(e.target).data('id'));
+      });
+
+      $('.tm-tab-link.active').click(); // Open default tab
+
+
+      /************** Video background *********/
+
+      setVideoSize();
+
+      // Set video background size based on window size
+      let timeout;
+      window.onresize = function(){
+        clearTimeout(timeout);
+        timeout = setTimeout(setVideoSize, 100);
+      };
+
+      // Play/Pause button for video background      
+      const btn = $("#tm-video-control-button");
+
+      btn.on("click", function(e) {
+        const video = document.getElementById("tm-video");
+        $(this).removeClass();
+
+        if (video.paused) {
+          video.play();
+          $(this).addClass("fas fa-pause");
+        } else {
+          video.pause();
+          $(this).addClass("fas fa-play");
+        }
+      });
+    });
+      
+  </script>
+  <h2 id="refresh-timer"></h2>
+
+  <script src="index.js"></script>
+</body>
+</html>
+

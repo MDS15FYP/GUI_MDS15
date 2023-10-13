@@ -1,0 +1,83 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/qwan0066/fyp_test/main/Emotion_Dataset.csv"
+  },
+  "background": null,
+  "width": 535,
+  "height": 500,
+  "encoding": {
+    "x": {
+      "field": "Day",
+      "type": "ordinal",
+      "axis": {"labelColor":"white"},
+      
+      "sort":["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+    }
+  },
+  "layer": [
+    {
+      "encoding": {
+        "color": {
+          "field": "Emotion",
+          "type": "nominal",
+        "legend": {"labelColor":"white"}
+        },
+        "x": {
+          "field": "Day",
+          "type": "ordinal",
+          "axis": {"labelColor":"white", "titleColor":"white"}
+        },
+        "y": {
+          "aggregate": "count",
+          "field": "Emotion",
+          "axis": {"labelColor":"white","titleColor":"white"}
+        }
+      },
+      "layer": [
+        {
+          "mark": "line"
+        },
+        {
+          "transform": [
+            {
+              "filter": {
+                "param": "hover",
+                "empty": false
+              }
+            }
+          ],
+          "mark": "point"
+        }
+      ]
+    },
+    {
+      "mark": {"type":"rule", "fill":"white"},
+      "encoding": {
+        "opacity": {
+          "condition": {
+            "value": 0.3,
+            "param": "hover",
+            "empty": false
+          },
+          "value": 0
+        }
+      },
+      "params": [
+        {
+          "name": "hover",
+          "select": {
+            "type": "point",
+            "fields": [
+              "Day"
+            ],
+            "nearest": true,
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ]
+    }
+  ],
+  "config": {}
+}
